@@ -1,0 +1,65 @@
+.logos {
+  padding: 3rem 0;
+  position: relative;
+  z-index: 1;
+}
+
+.logos__inner {
+  text-align: center;
+}
+
+.logos__label {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 2rem;
+}
+
+.logos__track {
+  overflow: hidden;
+  mask-image: linear-gradient(90deg, transparent, black 10%, black 90%, transparent);
+}
+
+.logos__scroll {
+  display: flex;
+  gap: 1.5rem;
+  width: max-content;
+  animation: logo-scroll 30s linear infinite;
+}
+
+.logos__scroll:hover {
+  animation-play-state: paused;
+}
+
+.logos__item {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  padding: 0.75rem 1.5rem;
+  font-family: var(--font-display);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.logos__icon {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(168, 85, 247, 0.15));
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--blue-400);
+}
+
+@keyframes logo-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
