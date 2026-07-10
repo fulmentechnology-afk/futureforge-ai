@@ -1,0 +1,870 @@
+/* ===============================
+   FUTUREFORGE AI CHATBOT V3
+   PART 1
+================================ */
+
+.ff-chat-button{
+    position:fixed;
+    bottom:30px;
+    right:30px;
+    width:72px;
+    height:72px;
+    border:none;
+    border-radius:50%;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#fff;
+    font-size:28px;
+    background:linear-gradient(135deg,#2563eb,#4f46e5,#06b6d4);
+    box-shadow:
+    0 0 25px rgba(37,99,235,.45),
+    0 0 50px rgba(79,70,229,.25);
+    z-index:999999;
+    transition:.35s;
+    overflow:hidden;
+    }
+    
+    .ff-chat-button:hover{
+    transform:translateY(-3px);
+    box-shadow:
+    0 0 35px rgba(37,99,235,.7),
+    0 0 70px rgba(79,70,229,.45);
+    }
+    
+    .ff-chat-window{
+    position:fixed;
+    right:30px;
+    bottom:120px;
+    width:420px;
+    height:600px;
+    
+    display:flex;
+    flex-direction:column;
+    
+    background:rgba(10,15,35,.82);
+    
+    backdrop-filter:blur(25px);
+    -webkit-backdrop-filter:blur(25px);
+    
+    border:1px solid rgba(255,255,255,.08);
+    
+    border-radius:28px;
+    
+    overflow:hidden;
+    
+    z-index:999998;
+    
+    box-shadow:
+    0 30px 80px rgba(0,0,0,.45),
+    0 0 80px rgba(37,99,235,.18);
+    }
+    
+    .ff-header{
+    
+    height:82px;
+    
+    display:flex;
+    
+    align-items:center;
+    
+    justify-content:space-between;
+    
+    padding:0 22px;
+    
+    background:linear-gradient(
+    135deg,
+    #2563eb,
+    #4f46e5,
+    #0ea5e9
+    );
+    
+    color:white;
+    }
+    
+    .ff-header-left{
+    
+    display:flex;
+    
+    align-items:center;
+    
+    gap:15px;
+    
+    }
+    
+    .ff-avatar{
+    
+    width:48px;
+    
+    height:48px;
+    
+    border-radius:50%;
+    
+    display:flex;
+    
+    align-items:center;
+    
+    justify-content:center;
+    
+    background:rgba(255,255,255,.15);
+    
+    font-size:22px;
+    
+    backdrop-filter:blur(10px);
+    
+    }
+    
+    .ff-header h3{
+    
+    margin:0;
+    
+    font-size:18px;
+    
+    font-weight:700;
+    
+    }
+    
+    .ff-header p{
+    
+    margin:2px 0 0;
+    
+    font-size:12px;
+    
+    opacity:.85;
+    
+    }
+    
+    .ff-header-actions{
+    
+    display:flex;
+    
+    gap:10px;
+    
+    }
+    
+    .ff-header-actions button{
+    
+    width:36px;
+    
+    height:36px;
+    
+    border:none;
+    
+    border-radius:12px;
+    
+    background:rgba(255,255,255,.12);
+    
+    color:white;
+    
+    cursor:pointer;
+    
+    transition:.25s;
+    
+    }
+    
+    .ff-header-actions button:hover{
+    
+    background:rgba(255,255,255,.22);
+    
+    }
+    
+    .ff-body{
+    
+    flex:1;
+    
+    padding:18px;
+    
+    overflow-y:auto;
+    
+    display:flex;
+    
+    flex-direction:column;
+    
+    gap:16px;
+    
+    background:
+    linear-gradient(
+    180deg,
+    rgba(13,18,38,.95),
+    rgba(8,12,25,.98)
+    );
+    
+    }/* =====================================
+   PART 2
+   Messages + Typing Indicator
+===================================== */
+
+.message{
+    display:flex;
+    flex-direction:column;
+    max-width:85%;
+    animation:fadeIn .35s ease;
+    }
+    
+    .message.bot{
+    align-self:flex-start;
+    }
+    
+    .message.user{
+    align-self:flex-end;
+    }
+    
+    .bubble{
+    
+    padding:14px 18px;
+    
+    border-radius:18px;
+    
+    font-size:14px;
+    
+    line-height:1.6;
+    
+    white-space:pre-wrap;
+    
+    word-break:break-word;
+    
+    }
+    
+    .message.bot .bubble{
+    
+    background:rgba(255,255,255,.08);
+    
+    border:1px solid rgba(255,255,255,.08);
+    
+    color:#f8fafc;
+    
+    border-bottom-left-radius:6px;
+    
+    backdrop-filter:blur(10px);
+    
+    }
+    
+    .message.user .bubble{
+    
+    background:linear-gradient(
+    135deg,
+    #2563eb,
+    #4f46e5
+    );
+    
+    color:white;
+    
+    border-bottom-right-radius:6px;
+    
+    box-shadow:
+    
+    0 8px 25px rgba(37,99,235,.35);
+    
+    }
+    
+    .message span{
+    
+    margin-top:6px;
+    
+    font-size:11px;
+    
+    opacity:.55;
+    
+    padding:0 4px;
+    
+    }
+    
+    .message.user span{
+    
+    text-align:right;
+    
+    }
+    
+    .typing{
+    
+    display:flex;
+    
+    align-items:center;
+    
+    gap:6px;
+    
+    padding:14px 18px;
+    
+    width:70px;
+    
+    border-radius:18px;
+    
+    background:rgba(255,255,255,.08);
+    
+    border-bottom-left-radius:6px;
+    
+    }
+    
+    .typing div{
+    
+    width:8px;
+    
+    height:8px;
+    
+    border-radius:50%;
+    
+    background:#60a5fa;
+    
+    animation:typing 1.2s infinite;
+    
+    }
+    
+    .typing div:nth-child(2){
+    
+    animation-delay:.2s;
+    
+    }
+    
+    .typing div:nth-child(3){
+    
+    animation-delay:.4s;
+    
+    }
+    
+    @keyframes typing{
+    
+    0%{
+    
+    transform:translateY(0);
+    
+    opacity:.3;
+    
+    }
+    
+    50%{
+    
+    transform:translateY(-6px);
+    
+    opacity:1;
+    
+    }
+    
+    100%{
+    
+    transform:translateY(0);
+    
+    opacity:.3;
+    
+    }
+    
+    }
+    
+    @keyframes fadeIn{
+    
+    from{
+    
+    opacity:0;
+    
+    transform:translateY(10px);
+    
+    }
+    
+    to{
+    
+    opacity:1;
+    
+    transform:translateY(0);
+    
+    }
+    
+    }
+    
+    .ff-body::-webkit-scrollbar{
+    
+    width:6px;
+    
+    }
+    
+    .ff-body::-webkit-scrollbar-thumb{
+    
+    background:#2563eb;
+    
+    border-radius:50px;
+    
+    }
+    
+    .ff-body::-webkit-scrollbar-track{
+    
+    background:transparent;
+    
+    }/* =====================================
+   PART 3
+   Quick Actions + Input Area
+===================================== */
+
+.ff-quick-actions{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:10px;
+    padding:16px;
+    background:rgba(255,255,255,.02);
+    border-top:1px solid rgba(255,255,255,.05);
+    }
+    
+    .quick-btn{
+    
+    display:flex;
+    
+    align-items:center;
+    
+    gap:10px;
+    
+    padding:12px 16px;
+    
+    border:none;
+    
+    border-radius:14px;
+    
+    cursor:pointer;
+    
+    font-size:13px;
+    
+    font-weight:600;
+    
+    color:#f8fafc;
+    
+    background:rgba(255,255,255,.05);
+    
+    transition:.25s;
+    
+    }
+    
+    .quick-btn:hover{
+    
+    background:linear-gradient(
+    135deg,
+    #2563eb,
+    #4f46e5
+    );
+    
+    transform:translateY(-2px);
+    
+    box-shadow:
+    0 10px 25px rgba(37,99,235,.25);
+    
+    }
+    
+    .ff-input{
+    
+    display:flex;
+    
+    align-items:center;
+    
+    gap:10px;
+    
+    padding:16px;
+    
+    background:#0b1220;
+    
+    border-top:1px solid rgba(255,255,255,.06);
+    
+    }
+    
+    .ff-input input{
+    
+    flex:1;
+    
+    height:48px;
+    
+    border:none;
+    
+    outline:none;
+    
+    padding:0 18px;
+    
+    border-radius:16px;
+    
+    background:rgba(255,255,255,.08);
+    
+    color:white;
+    
+    font-size:14px;
+    
+    transition:.25s;
+    
+    }
+    
+    .ff-input input::placeholder{
+    
+    color:rgba(255,255,255,.45);
+    
+    }
+    
+    .ff-input input:focus{
+    
+    background:rgba(255,255,255,.12);
+    
+    box-shadow:
+    0 0 0 2px rgba(37,99,235,.35);
+    
+    }
+    
+    .icon-btn{
+    
+    width:42px;
+    
+    height:42px;
+    
+    border:none;
+    
+    border-radius:14px;
+    
+    cursor:pointer;
+    
+    display:flex;
+    
+    align-items:center;
+    
+    justify-content:center;
+    
+    background:rgba(255,255,255,.06);
+    
+    color:white;
+    
+    transition:.25s;
+    
+    }
+    
+    .icon-btn:hover{
+    
+    background:#2563eb;
+    
+    transform:translateY(-2px);
+    
+    }
+    
+    .send-btn{
+    
+    width:50px;
+    
+    height:50px;
+    
+    border:none;
+    
+    border-radius:16px;
+    
+    cursor:pointer;
+    
+    display:flex;
+    
+    align-items:center;
+    
+    justify-content:center;
+    
+    background:linear-gradient(
+    135deg,
+    #2563eb,
+    #4f46e5
+    );
+    
+    color:white;
+    
+    transition:.3s;
+    
+    box-shadow:
+    0 10px 30px rgba(37,99,235,.35);
+    
+    }
+    
+    .send-btn:hover{
+    
+    transform:scale(1.08);
+    
+    box-shadow:
+    0 15px 40px rgba(37,99,235,.5);
+    
+    }
+    
+    .send-btn:active{
+    
+    transform:scale(.95);
+    
+    }/* =====================================
+   PART 4
+   Finishing Touches
+===================================== */
+
+/* Floating pulse animation */
+
+.ff-chat-button::before{
+    content:"";
+    position:absolute;
+    width:100%;
+    height:100%;
+    border-radius:50%;
+    background:rgba(37,99,235,.35);
+    animation:pulse 2.5s infinite;
+    z-index:-1;
+    }
+    
+    @keyframes pulse{
+    
+    0%{
+    transform:scale(1);
+    opacity:.8;
+    }
+    
+    70%{
+    transform:scale(1.7);
+    opacity:0;
+    }
+    
+    100%{
+    transform:scale(1.7);
+    opacity:0;
+    }
+    
+    }
+    
+    /* Glass shine */
+    
+    .ff-chat-window::before{
+    
+    content:"";
+    
+    position:absolute;
+    
+    top:0;
+    
+    left:-140%;
+    
+    width:60%;
+    
+    height:100%;
+    
+    background:
+    
+    linear-gradient(
+    
+    90deg,
+    
+    transparent,
+    
+    rgba(255,255,255,.08),
+    
+    transparent
+    
+    );
+    
+    transform:skewX(-20deg);
+    
+    animation:shine 8s infinite;
+    
+    pointer-events:none;
+    
+    }
+    
+    @keyframes shine{
+    
+    0%{
+    
+    left:-150%;
+    
+    }
+    
+    100%{
+    
+    left:180%;
+    
+    }
+    
+    }
+    
+    /* Floating animation */
+    
+    .ff-chat-window{
+    
+    animation:floatWindow 5s ease-in-out infinite;
+    
+    }
+    
+    @keyframes floatWindow{
+    
+    0%{
+    
+    transform:translateY(0px);
+    
+    }
+    
+    50%{
+    
+    transform:translateY(-5px);
+    
+    }
+    
+    100%{
+    
+    transform:translateY(0px);
+    
+    }
+    
+    }
+    
+    /* Header glow */
+    
+    .ff-header{
+    
+    box-shadow:
+    
+    0 10px 35px rgba(37,99,235,.25);
+    
+    }
+    
+    /* Smooth transitions */
+    
+    .ff-chat-window,
+    .ff-chat-button,
+    .quick-btn,
+    .send-btn,
+    .icon-btn,
+    .ff-input input{
+    
+    transition:all .3s ease;
+    
+    }
+    
+    /* Mobile */
+    
+    @media(max-width:768px){
+    
+    .ff-chat-window{
+    
+    right:12px;
+    
+    left:12px;
+    
+    bottom:95px;
+    
+    width:auto;
+    
+    height:78vh;
+    
+    border-radius:22px;
+    
+    }
+    
+    .ff-chat-button{
+    
+    right:18px;
+    
+    bottom:18px;
+    
+    width:64px;
+    
+    height:64px;
+    
+    }
+    
+    .ff-header{
+    
+    padding:18px;
+    
+    }
+    
+    .ff-input{
+    
+    padding:12px;
+    
+    }
+    
+    .ff-quick-actions{
+    
+    padding:12px;
+    
+    }
+    
+    .quick-btn{
+    
+    font-size:12px;
+    
+    }
+    
+    }
+    
+    /* Nice selection */
+    
+    ::selection{
+    
+    background:#2563eb;
+    
+    color:white;
+    
+    }
+    
+    /* Prevent image dragging */
+    
+    img{
+    
+    user-select:none;
+    
+    -webkit-user-drag:none;
+    
+    }
+    
+    /* Better fonts */
+    
+    .ff-chat-window{
+    
+    font-family:
+    
+    Inter,
+    
+    Segoe UI,
+    
+    sans-serif;
+    
+    }
+    
+    /* Small glow on hover */
+    
+    .message.user .bubble:hover{
+    
+    box-shadow:
+    
+    0 10px 30px rgba(37,99,235,.45);
+    
+    }
+    
+    .message.bot .bubble:hover{
+    
+    background:rgba(255,255,255,.12);
+    
+    }
+    
+    /* Smooth scrollbar */
+    
+    *{
+    
+    scrollbar-width:thin;
+    
+    scrollbar-color:#2563eb transparent;
+    
+    }
+    /* ===========================
+   Online Status
+=========================== */
+
+.ff-status{
+display:inline-flex;
+align-items:center;
+gap:6px;
+
+margin-top:6px;
+
+padding:5px 12px;
+
+border-radius:50px;
+
+background:rgba(34,197,94,.15);
+
+color:#22c55e;
+
+font-size:11px;
+
+font-weight:600;
+
+letter-spacing:.4px;
+
+border:1px solid rgba(34,197,94,.25);
+}

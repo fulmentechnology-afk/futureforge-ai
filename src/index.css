@@ -159,6 +159,12 @@ img {
 .glass-card:hover {
   background: var(--bg-glass-hover);
   border-color: var(--border-glass-hover);
+
+  transform: translateY(-8px);
+
+  box-shadow:
+    0 20px 45px rgba(0, 0, 0, 0.35),
+    0 0 30px rgba(59, 130, 246, 0.15);
 }
 
 .glass-card--premium {
@@ -292,4 +298,385 @@ img {
     opacity: 1;
     transform: none;
   }
+}
+/* ==========================
+   Form Components
+========================== */
+
+.input {
+  width: 100%;
+  padding: 16px 18px;
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.04);
+  color: white;
+  transition: all .3s ease;
+  backdrop-filter: blur(20px);
+}
+
+.input::placeholder{
+  color:#94a3b8;
+}
+
+.input:focus{
+  outline:none;
+  border-color:#22d3ee;
+  box-shadow:0 0 0 4px rgba(34,211,238,.08);
+}
+
+.input option{
+  background:#0f172a;
+  color:white;
+}
+
+textarea.input{
+  min-height:160px;
+}
+
+.upload-box{
+
+  width:100%;
+  min-height:190px;
+
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  gap:14px;
+
+  background:rgba(255,255,255,.04);
+
+  backdrop-filter:blur(24px);
+  -webkit-backdrop-filter:blur(24px);
+
+  border:2px dashed rgba(34,211,238,.25);
+
+  border-radius:24px;
+
+  transition:all .35s ease;
+
+  overflow:hidden;
+
+  position:relative;
+
+}
+
+.upload-box::before{
+
+  content:"";
+
+  position:absolute;
+
+  inset:0;
+
+  background:
+      linear-gradient(
+          135deg,
+          rgba(59,130,246,.08),
+          rgba(168,85,247,.05)
+      );
+
+  opacity:0;
+
+  transition:.35s;
+
+}
+
+.upload-box:hover{
+
+  border-color:#22d3ee;
+
+  background:rgba(255,255,255,.06);
+
+  transform:translateY(-3px);
+
+  box-shadow:
+      0 15px 40px rgba(34,211,238,.12);
+
+}
+
+.upload-box:hover::before{
+
+  opacity:1;
+
+}
+
+.upload-box>*{
+
+  position:relative;
+
+  z-index:2;
+
+}
+
+/* ==========================
+   Fulmen Glass Buttons
+========================== */
+
+.btn-glass {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+
+  padding: 16px 32px;
+
+  border-radius: 18px;
+
+  color: var(--text-primary);
+
+  font-weight: 600;
+  letter-spacing: .2px;
+
+  background: rgba(255,255,255,.05);
+
+  border: 1px solid rgba(255,255,255,.08);
+
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+
+  overflow: hidden;
+  cursor: pointer;
+
+  transition:
+      transform .35s ease,
+      box-shadow .35s ease,
+      border-color .35s ease,
+      background .35s ease;
+}
+
+.btn-glass::before{
+
+  content:"";
+
+  position:absolute;
+
+  inset:0;
+
+  background:linear-gradient(
+      120deg,
+      transparent 0%,
+      rgba(255,255,255,.18) 50%,
+      transparent 100%
+  );
+
+  transform:translateX(-120%);
+
+  transition:transform .7s ease;
+
+}
+
+.btn-glass:hover::before{
+
+  transform:translateX(120%);
+
+}
+
+.btn-glass:active{
+
+  transform:scale(.97);
+
+}
+
+.btn-glass::before{
+
+  content:"";
+
+  position:absolute;
+
+  inset:0;
+
+  background:
+      linear-gradient(
+          135deg,
+          rgba(59,130,246,.20),
+          rgba(168,85,247,.18)
+      );
+
+  opacity:0;
+
+  transition:.35s;
+
+}
+
+.btn-glass:hover{
+
+  transform:translateY(-4px);
+
+  border-color:rgba(147,197,253,.25);
+
+  background:rgba(255,255,255,.08);
+
+  box-shadow:
+    0 10px 30px rgba(59,130,246,.15),
+    0 0 50px rgba(96,165,250,.12);
+
+}
+
+.btn-glass:hover::before{
+
+  opacity:1;
+
+}
+
+.btn-glass-primary{
+
+  border:1px solid rgba(96,165,250,.30);
+
+  transition:
+    all .35s ease;
+
+}
+
+.btn-glass-primary:hover{
+
+  transform:translateY(-3px);
+
+  border-color:rgba(59,130,246,.65);
+
+  box-shadow:
+      0 12px 35px rgba(37,99,235,.30),
+      0 0 25px rgba(59,130,246,.18);
+
+}
+
+
+/* Secondary */
+
+.btn-glass-secondary{
+
+  background:rgba(255,255,255,.03);
+
+  transition:all .35s ease;
+
+}
+
+.btn-glass-secondary:hover{
+
+  transform:translateY(-3px);
+
+  background:rgba(255,255,255,.07);
+
+  border-color:rgba(255,255,255,.18);
+
+}
+/* Animated Light Sweep */
+
+.btn-glass::after{
+
+  content:"";
+
+  position:absolute;
+
+  left:-120%;
+
+  top:0;
+
+  width:80px;
+
+  height:100%;
+
+  background:
+
+      linear-gradient(
+
+          90deg,
+
+          transparent,
+
+          rgba(255,255,255,.18),
+
+          transparent
+
+      );
+
+  transform:skewX(-20deg);
+
+}
+
+.btn-glass:hover::after{
+
+  left:150%;
+
+  transition:1s;
+
+}
+/* Floating Press Effect */
+
+.btn-glass:active{
+
+  transform:translateY(-1px) scale(.98);
+
+}
+
+/* Focus Ring */
+
+.btn-glass:focus-visible{
+
+  outline:none;
+
+  box-shadow:
+
+      0 0 0 4px rgba(96,165,250,.18),
+
+      0 0 40px rgba(59,130,246,.18);
+
+}
+
+/* Icon Animation */
+
+.btn-glass svg{
+
+  transition:transform .35s ease;
+
+}
+
+.btn-glass:hover svg{
+
+  transform:translateX(4px);
+
+}
+/* Premium Glow */
+
+.glow-border{
+
+  position:relative;
+
+}
+
+.glow-border::before{
+
+  content:"";
+
+  position:absolute;
+
+  inset:-1px;
+
+  border-radius:inherit;
+
+  background:
+
+      linear-gradient(
+
+          135deg,
+
+          rgba(59,130,246,.25),
+
+          rgba(168,85,247,.15)
+
+      );
+
+  opacity:0;
+
+  transition:.35s;
+
+  z-index:-1;
+
+}
+
+.glow-border:hover::before{
+
+  opacity:1;
+
 }

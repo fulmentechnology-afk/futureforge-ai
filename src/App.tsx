@@ -1,33 +1,27 @@
-import { AnimatedBackground } from './components/AnimatedBackground'
-import { Navbar } from './components/Navbar'
-import { Hero } from './components/Hero'
-import { Logos } from './components/Logos'
-import { Features } from './components/Features'
-import { WhyChooseUs } from './components/WhyChooseUs'
-import { Testimonials } from './components/Testimonials'
-import { Pricing } from './components/Pricing'
-import { FAQ } from './components/FAQ'
-import { Contact } from './components/Contact'
-import { Footer } from './components/Footer'
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+import Layout from "./layouts/Layout";
+import ScrollToTop from "./layouts/ScrollToTop";
+
+import Home from "./pages/Home";
+import Careers from "./pages/Careers";
+import NotFound from "./pages/NotFound";
 
 function App() {
   return (
-    <>
-      <AnimatedBackground />
-      <Navbar />
-      <main>
-        <Hero />
-        <Logos />
-        <Features />
-        <WhyChooseUs />
-        <Testimonials />
-        <Pricing />
-        <FAQ />
-        <Contact />
-      </main>
-      <Footer />
-    </>
-  )
+    <BrowserRouter>
+      <ScrollToTop />
+
+      <Routes>
+        <Route element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route path="/careers" element={<Careers />} />
+        </Route>
+
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
-export default App
+export default App;
