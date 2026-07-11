@@ -1,5 +1,5 @@
 import HeroContent from "./HeroContent";
-import LucyPreview from "./LucyPreview";
+
 
 export default function Hero() {
   return (
@@ -22,7 +22,7 @@ export default function Hero() {
           }}
         >
           <HeroContent />
-          <LucyPreview />
+          
         </div>
       </div>
     </section>
