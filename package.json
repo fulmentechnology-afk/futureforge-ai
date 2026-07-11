@@ -13,6 +13,7 @@
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
     "@google/genai": "^2.10.0",
+    "@vercel/node": "^5.8.23",
     "cors": "^2.8.6",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
