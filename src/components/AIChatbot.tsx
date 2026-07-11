@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+
 import {
   Send,
   Bot,
@@ -9,7 +10,9 @@ import {
   X,
   Minimize2,
 } from "lucide-react";
+
 import { motion, AnimatePresence } from "framer-motion";
+
 import "./AIChatbot.css";
 
 interface Message {
@@ -46,32 +49,17 @@ const quickOptions: QuickOption[] = [
 
 const AIChatbot = () => {
   const [open, setOpen] = useState(false);
+
   const [typing, setTyping] = useState(false);
+
   const [input, setInput] = useState("");
 
-  const [messages, setMessages] = useState<Message[]>([
-    {
-      id: 1,
-      sender: "bot",
-      text: `👋 Hi!
+  /*
+      Empty chat on startup.
+      No welcome message.
+  */
 
-I'm Lucy,
-AI Business Consultant for Fulmen Technology Pvt. Ltd.
-
-I help organizations discover AI automation opportunities,
-digital transformation strategies,
-enterprise software,
-AI agents,
-and intelligent business workflows.
-
-Tell me about your business and I'll recommend the best AI solution for you.`,
-
-      time: new Date().toLocaleTimeString([], {
-        hour: "2-digit",
-        minute: "2-digit",
-      }),
-    },
-  ]);
+  const [messages, setMessages] = useState<Message[]>([]);
 
   const bottomRef = useRef<HTMLDivElement>(null);
 
@@ -82,10 +70,10 @@ Tell me about your business and I'll recommend the best AI solution for you.`,
   }, [messages]);
 
   /*
-      Opens chatbot from anywhere
-      Hero
-      Lucy Preview
-      Dashboard
+      Open chatbot from anywhere.
+      Hero button,
+      AI Consultant button,
+      Future buttons.
   */
 
   useEffect(() => {
@@ -105,8 +93,11 @@ Tell me about your business and I'll recommend the best AI solution for you.`,
 
     const userMessage: Message = {
       id: Date.now(),
+
       sender: "user",
+
       text,
+
       time: new Date().toLocaleTimeString([], {
         hour: "2-digit",
         minute: "2-digit",
@@ -122,9 +113,11 @@ Tell me about your business and I'll recommend the best AI solution for you.`,
     try {
       const response = await fetch("/api/chat", {
         method: "POST",
+
         headers: {
           "Content-Type": "application/json",
         },
+
         body: JSON.stringify({
           message: text,
         }),
@@ -138,8 +131,11 @@ Tell me about your business and I'll recommend the best AI solution for you.`,
 
       const botMessage: Message = {
         id: Date.now() + 1,
+
         sender: "bot",
+
         text: data.reply,
+
         time: new Date().toLocaleTimeString([], {
           hour: "2-digit",
           minute: "2-digit",
@@ -154,8 +150,11 @@ Tell me about your business and I'll recommend the best AI solution for you.`,
         ...prev,
         {
           id: Date.now() + 1,
+
           sender: "bot",
-          text: "I'm sorry, I couldn't reach the AI server. Please try again in a moment.",
+
+          text: "Sorry, I couldn't reach the AI server. Please try again.",
+
           time: new Date().toLocaleTimeString([], {
             hour: "2-digit",
             minute: "2-digit",
@@ -166,9 +165,10 @@ Tell me about your business and I'll recommend the best AI solution for you.`,
 
     setTyping(false);
   };
+
   return (
     <>
-      {/* Floating Chat Button */}
+      {/* Floating Button */}
 
       <motion.button
         whileHover={{ scale: 1.08 }}
@@ -182,15 +182,27 @@ Tell me about your business and I'll recommend the best AI solution for you.`,
       <AnimatePresence>
         {open && (
           <motion.div
-            initial={{ opacity: 0, y: 30, scale: 0.9 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 30, scale: 0.9 }}
-            transition={{ duration: 0.35 }}
+            initial={{
+              opacity: 0,
+              y: 30,
+              scale: 0.9,
+            }}
+            animate={{
+              opacity: 1,
+              y: 0,
+              scale: 1,
+            }}
+            exit={{
+              opacity: 0,
+              y: 30,
+              scale: 0.9,
+            }}
+            transition={{
+              duration: 0.35,
+            }}
             className="ff-chat-window"
           >
-            {/* =========================
-                HEADER
-            ========================== */}
+            {/* Header */}
 
             <div className="ff-header">
               <div className="ff-header-left">
@@ -223,95 +235,125 @@ Tell me about your business and I'll recommend the best AI solution for you.`,
                 </button>
               </div>
             </div>
-
-            {/* =========================
+                        {/* =========================
                 CHAT BODY
             ========================== */}
 
-            <div className="ff-body">
-              {messages.map((message) => (
-                <div
-                  key={message.id}
-                  className={`message ${message.sender}`}
-                >
-                  <div className="bubble">
-                    {message.text}
-                  </div>
+<div className="ff-body">
 
-                  <span>{message.time}</span>
-                </div>
-              ))}
+{/* Empty State */}
 
-              {typing && (
-                <div className="typing">
-                  <div></div>
-                  <div></div>
-                  <div></div>
-                </div>
-              )}
+{messages.length === 0 && (
+  <div className="ff-empty">
+    <Bot size={46} />
 
-              <div ref={bottomRef} />
-            </div>
+    <h3>Lucy</h3>
 
-            {/* =========================
-                QUICK ACTIONS
-            ========================== */}
+    <p>AI Business Consultant</p>
 
-            <div className="ff-quick-actions">
-              {quickOptions.map((option) => (
-                <button
-                  key={option.title}
-                  className="quick-btn"
-                  onClick={() => sendMessage(option.title)}
-                >
-                  <Sparkles size={15} />
+    <small>
+      Select one of the AI services below or ask me anything
+      about your business.
+    </small>
+  </div>
+)}
 
-                  {option.title}
-                </button>
-              ))}
-            </div>
+{/* Messages */}
 
-            {/* =========================
-                INPUT
-            ========================== */}
+{messages.map((message) => (
+  <div
+    key={message.id}
+    className={`message ${message.sender}`}
+  >
+    <div className="bubble">
+      {message.text}
+    </div>
 
-            <div className="ff-input">
-              <button className="icon-btn">
-                <Paperclip size={18} />
-              </button>
+    <span>
+      {message.time}
+    </span>
+  </div>
+))}
 
-              <input
-                type="text"
-                placeholder="Ask Lucy anything..."
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter") {
-                    sendMessage(input);
-                  }
-                }}
-              />
+{typing && (
+  <div className="typing">
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+)}
 
-              <button className="icon-btn">
-                <Smile size={18} />
-              </button>
+<div ref={bottomRef} />
 
-              <button className="icon-btn">
-                <Mic size={18} />
-              </button>
+</div>
 
-              <button
-                className="send-btn"
-                onClick={() => sendMessage(input)}
-              >
-                <Send size={18} />
-              </button>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </>
-  );
+{/* =========================
+  QUICK ACTIONS
+========================== */}
+
+<div className="ff-quick-actions">
+
+{quickOptions.map((option) => (
+
+  <button
+    key={option.title}
+    className="quick-btn"
+    onClick={() => sendMessage(option.title)}
+  >
+    <Sparkles size={15} />
+
+    {option.title}
+
+  </button>
+
+))}
+
+</div>
+
+{/* =========================
+  INPUT
+========================== */}
+
+<div className="ff-input">
+
+<button className="icon-btn">
+  <Paperclip size={18} />
+</button>
+
+<input
+  type="text"
+  placeholder="Ask Lucy anything..."
+  value={input}
+  onChange={(e) => setInput(e.target.value)}
+  onKeyDown={(e) => {
+    if (e.key === "Enter") {
+      sendMessage(input);
+    }
+  }}
+/>
+
+<button className="icon-btn">
+  <Smile size={18} />
+</button>
+
+<button className="icon-btn">
+  <Mic size={18} />
+</button>
+
+<button
+  className="send-btn"
+  onClick={() => sendMessage(input)}
+>
+  <Send size={18} />
+</button>
+
+</div>
+
+</motion.div>
+)}
+</AnimatePresence>
+</>
+);
 };
 
 export default AIChatbot;

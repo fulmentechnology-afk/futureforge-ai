@@ -1135,3 +1135,36 @@ box-shadow:
 transform:scale(1.08);
 
 }
+.ff-empty {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   text-align: center;
+   padding: 50px 24px;
+   color: #d1d5db;
+   gap: 12px;
+ }
+ 
+ .ff-empty svg {
+   color: #4f8cff;
+ }
+ 
+ .ff-empty h3 {
+   color: white;
+   margin: 0;
+   font-size: 22px;
+   font-weight: 700;
+ }
+ 
+ .ff-empty p {
+   color: #9ca3af;
+   margin: 0;
+   font-size: 15px;
+ }
+ 
+ .ff-empty small {
+   color: #6b7280;
+   max-width: 260px;
+   line-height: 1.6;
+ }       
