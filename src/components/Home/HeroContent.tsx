@@ -51,9 +51,14 @@ export default function HeroContent() {
             Discover Our Solutions
           </button>
   
-          <button className="btn-glass btn-glass-secondary">
-            Talk to Lucy
-          </button>
+          <button
+  className="btn-glass btn-glass-secondary"
+  onClick={() => {
+    window.dispatchEvent(new Event("open-lucy"));
+  }}
+>
+  AI Consultant
+</button>
         </div>
       </div>
     );
