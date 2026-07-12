@@ -210,19 +210,21 @@ const AIChatbot = () => {
                   <Bot size={24} />
                 </div>
 
-                <div>
-                  <h3>Lucy</h3>
+                <div className="ff-header-info">
 
-                  <p>AI Business Consultant</p>
+  <h3>Lucy Business Consulting AI</h3>
 
-                  <small className="ff-powered">
-                    Powered by FutureForge AI
-                  </small>
+  <p>Enterprise AI Consultant</p>
 
-                  <span className="ff-status">
-                    🟢 Online
-                  </span>
-                </div>
+  <small className="ff-powered">
+    Powered by FutureForge AI
+  </small>
+
+  <span className="ff-status">
+    🟢 Online
+  </span>
+
+</div>
               </div>
 
               <div className="ff-header-actions">
