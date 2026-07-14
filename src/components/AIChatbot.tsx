@@ -28,22 +28,13 @@ interface QuickOption {
 
 const quickOptions: QuickOption[] = [
   {
-    title: "🏢 Automate My Business",
-  },
-  {
-    title: "🏗 Construction AI",
-  },
-  {
-    title: "🏥 Healthcare Automation",
-  },
-  {
-    title: "🏡 Real Estate AI",
+    title: "🏢 Business Automation",
   },
   {
     title: "🤖 AI Solutions",
   },
   {
-    title: "📅 Schedule Strategy Call",
+    title: "📅 Strategy Consultation",
   },
 ];
 
@@ -55,25 +46,27 @@ const AIChatbot = () => {
   const [input, setInput] = useState("");
 
   /*
-      Empty chat on startup.
-      No welcome message.
+      Conversation starts empty.
+      Lucy responds only
+      after the visitor speaks.
   */
 
   const [messages, setMessages] = useState<Message[]>([]);
 
   const bottomRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    bottomRef.current?.scrollIntoView({
-      behavior: "smooth",
-    });
-  }, [messages]);
+ 
+/*
+useEffect(() => {
+  bottomRef.current?.scrollIntoView({
+    behavior: "smooth",
+  });
+}, [messages]);
+*/
 
   /*
-      Open chatbot from anywhere.
-      Hero button,
-      AI Consultant button,
-      Future buttons.
+      Open Lucy from anywhere
+      on the website.
   */
 
   useEffect(() => {
@@ -87,17 +80,13 @@ const AIChatbot = () => {
       window.removeEventListener("open-lucy", openLucy);
     };
   }, []);
-
   const sendMessage = async (text: string) => {
     if (!text.trim()) return;
 
     const userMessage: Message = {
       id: Date.now(),
-
       sender: "user",
-
       text,
-
       time: new Date().toLocaleTimeString([], {
         hour: "2-digit",
         minute: "2-digit",
@@ -153,7 +142,8 @@ const AIChatbot = () => {
 
           sender: "bot",
 
-          text: "Sorry, I couldn't reach the AI server. Please try again.",
+          text:
+            "I'm sorry, I'm unable to connect at the moment. Please try again shortly.",
 
           time: new Date().toLocaleTimeString([], {
             hour: "2-digit",
@@ -168,7 +158,7 @@ const AIChatbot = () => {
 
   return (
     <>
-      {/* Floating Button */}
+      {/* Floating Chat Button */}
 
       <motion.button
         whileHover={{ scale: 1.08 }}
@@ -185,7 +175,7 @@ const AIChatbot = () => {
             initial={{
               opacity: 0,
               y: 30,
-              scale: 0.9,
+              scale: 0.92,
             }}
             animate={{
               opacity: 1,
@@ -195,103 +185,90 @@ const AIChatbot = () => {
             exit={{
               opacity: 0,
               y: 30,
-              scale: 0.9,
+              scale: 0.92,
             }}
             transition={{
               duration: 0.35,
             }}
             className="ff-chat-window"
           >
-            {/* Header */}
-
-            <div className="ff-header">
-              <div className="ff-header-left">
-                <div className="ff-avatar">
-                  <Bot size={24} />
-                </div>
-
-                <div className="ff-header-info">
-
-  <h3>Lucy Business Consulting AI</h3>
-
-  <p>Enterprise AI Consultant</p>
-
-  <small className="ff-powered">
-    Powered by FutureForge AI
-  </small>
-
-  <span className="ff-status">
-    🟢 Online
-  </span>
-
-</div>
-              </div>
-
-              <div className="ff-header-actions">
-                <button>
-                  <Minimize2 size={18} />
-                </button>
-
-                <button onClick={() => setOpen(false)}>
-                  <X size={18} />
-                </button>
-              </div>
-            </div>
-                        {/* =========================
-                CHAT BODY
+                      {/* =========================
+                HEADER
             ========================== */}
 
-<div className="ff-body">
+<div className="ff-header">
 
-{/* Empty State */}
+<div className="ff-header-left">
 
-{messages.length === 0 && (
-  <div className="ff-empty">
-    <Bot size={46} />
-
-    <h3>Lucy</h3>
-
-    <p>AI Business Consultant</p>
-
-    <small>
-      Select one of the AI services below or ask me anything
-      about your business.
-    </small>
+  <div className="ff-avatar">
+    <Bot size={24} />
   </div>
-)}
+
+  <div className="ff-header-info">
+  <h3>Lucy Business Consulting AI</h3>
+</div>
+
+</div>
+
+<div className="ff-header-actions">
+
+  <button>
+    <Minimize2 size={18} />
+  </button>
+
+  <button onClick={() => setOpen(false)}>
+    <X size={18} />
+  </button>
+
+</div>
+
+</div>
+
+{/* =========================
+  CHAT BODY
+========================== */}
+
+<div className="ff-body">
 
 {/* Messages */}
 
 {messages.map((message) => (
+
   <div
     key={message.id}
     className={`message ${message.sender}`}
   >
+
     <div className="bubble">
       {message.text}
     </div>
 
-    <span>
-      {message.time}
-    </span>
+    <span>{message.time}</span>
+
   </div>
+
 ))}
 
+{/* Typing */}
+
 {typing && (
+
   <div className="typing">
+
     <div></div>
     <div></div>
     <div></div>
+
   </div>
+
 )}
 
 <div ref={bottomRef} />
 
 </div>
-
-{/* =========================
-  QUICK ACTIONS
-========================== */}
+            {/* =========================
+                QUICK ACTIONS
+            ========================== */}
 
 <div className="ff-quick-actions">
 
@@ -303,9 +280,7 @@ const AIChatbot = () => {
     onClick={() => sendMessage(option.title)}
   >
     <Sparkles size={15} />
-
     {option.title}
-
   </button>
 
 ))}
@@ -313,7 +288,7 @@ const AIChatbot = () => {
 </div>
 
 {/* =========================
-  INPUT
+  INPUT AREA
 ========================== */}
 
 <div className="ff-input">
@@ -324,7 +299,7 @@ const AIChatbot = () => {
 
 <input
   type="text"
-  placeholder="Ask Lucy anything..."
+  placeholder="Describe your business challenge..."
   value={input}
   onChange={(e) => setInput(e.target.value)}
   onKeyDown={(e) => {

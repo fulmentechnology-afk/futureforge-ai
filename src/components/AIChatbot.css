@@ -14,7 +14,7 @@
    bottom:32px;
 
    width:74px;
-   height:74px;
+   height:64px;
 
    border:none;
    border-radius:50%;
@@ -118,9 +118,9 @@ opacity:0;
 
    bottom:120px;
 
-   width:540px;
+   width:470px;
 
-   height:820px;
+   height:575px;
 
    display:flex;
 
@@ -234,9 +234,9 @@ transform:translateY(0px);
 
 .ff-header{
 
-height:108px;
+height:64px;
 
-padding:0 26px;
+padding:0 16px;
 
 display:flex;
 
@@ -278,9 +278,9 @@ gap:18px;
 
 .ff-avatar{
 
-width:60px;
+width:50px;
 
-height:60px;
+height:50px;
 
 border-radius:20px;
 
@@ -342,7 +342,7 @@ transform:scale(1);
 
    margin:0;
 
-   font-size:24px;
+   font-size:18px;
 
    font-weight:800;
 
@@ -440,29 +440,21 @@ rgba(255,255,255,.22);
 
 .ff-body{
 
-flex:1;
+   flex:1;
 
-padding:24px;
+   display:flex;
 
-overflow-y:auto;
+   flex-direction:column;
 
-display:flex;
+   overflow-y:auto;
 
-flex-direction:column;
+   padding:12px;
 
-gap:22px;
+   padding-top:18px;
 
-background:
+   gap:18px;
 
-linear-gradient(
-
-180deg,
-
-rgba(8,12,28,.96),
-
-rgba(4,8,20,.99)
-
-);
+   scroll-behavior:smooth;
 
 }
 
@@ -496,11 +488,11 @@ align-self:flex-end;
 
 .bubble{
 
-padding:20px 24px;
+padding:14px 18px;
 
 border-radius:24px;
 
-font-size:15px;
+font-size:14px;
 
 line-height:1.9;
 
@@ -559,6 +551,19 @@ padding:0 6px;
 .message.user span{
 
 text-align:right;
+
+}
+.message{
+
+   display:flex;
+
+   flex-direction:column;
+
+   max-width:88%;
+
+   animation:fadeIn .35s ease;
+
+   margin-bottom:18px;
 
 }
 /* =========================================
@@ -671,19 +676,17 @@ background:transparent;
 
 .ff-quick-actions{
 
-padding:18px;
+    padding:12px;
 
-display:grid;
+    display:flex;
 
-gap:12px;
+    flex-wrap:wrap;
 
-background:
+    gap:12px;
 
-rgba(255,255,255,.03);
+    max-height:110px;
 
-border-top:
-
-1px solid rgba(255,255,255,.05);
+    overflow-y:auto;
 
 }
 
@@ -695,9 +698,9 @@ align-items:center;
 
 gap:12px;
 
-padding:18px 20px;
+padding:8px 12px;
 
-border-radius:18px;
+border-radius:13px;
 
 cursor:pointer;
 
@@ -711,7 +714,7 @@ rgba(255,255,255,.05);
 
 color:white;
 
-font-size:15px;
+font-size:12px;
 
 font-weight:700;
 
@@ -753,7 +756,7 @@ align-items:center;
 
 gap:12px;
 
-padding:18px;
+padding:12px;
 
 background:
 
@@ -771,7 +774,7 @@ border-top:
 
 flex:1;
 
-height:60px;
+height:48px;
 
 padding:0 22px;
 
@@ -787,7 +790,7 @@ rgba(255,255,255,.08);
 
 color:white;
 
-font-size:16px;
+font-size:14px;
 
 transition:.3s;
 
@@ -813,9 +816,9 @@ box-shadow:
 
 .icon-btn{
 
-width:46px;
+width:40px;
 
-height:46px;
+height:40px;
 
 display:flex;
 
@@ -849,9 +852,9 @@ transform:translateY(-2px);
 
 .send-btn{
 
-width:58px;
+width:48px;
 
-height:58px;
+height:48px;
 
 border:none;
 
@@ -899,31 +902,26 @@ transform:scale(1.08);
 
 .ff-empty{
 
-   .ff-empty{
+display:flex;
 
-      display:flex;
-  
-      flex-direction:column;
-  
-      align-items:center;
-  
-      justify-content:center;
-  
-      flex:1;
-  
-      text-align:center;
-  
-      gap:18px;
-  
-      padding:70px;
-  
-  }
+flex-direction:column;
+
+align-items:center;
+
+justify-content:center;
+
+flex:1;
+
+text-align:center;
+
+gap:18px;
+
+padding:70px;
 
 color:#d1d5db;
 
-gap:15px;
-
 }
+
 
 .ff-empty svg{
 
@@ -947,7 +945,7 @@ color:white;
 
 margin:0;
 
-font-size:16px;
+font-size:14px;
 
 color:#cbd5e1;
 
@@ -1001,7 +999,7 @@ height:66px;
 
 .ff-header{
 
-height:92px;
+height:7px;
 
 padding:18px;
 
